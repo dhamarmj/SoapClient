@@ -9,20 +9,38 @@ namespace ConsoleApp1
     {
         public static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
-
-
+            
             AcademicoWebServiceClient academicoWebServiceClient = new AcademicoWebServiceClient();
+            string menuid = "0";
+            while (menuid != "4")
+            {
+                Console.WriteLine("Soap Client in C#!");
+                Console.WriteLine("1- Listar Estudiantes");
+                Console.WriteLine("2- Buscar Asignatura");
+                Console.WriteLine("3- Buscar Profesor");
+                Console.WriteLine("4- Salir");
+                menuid = Console.ReadLine();
+                if ( menuid == "1")
+                {
+                    var a = showStudentsAsync(academicoWebServiceClient);
+                    Task.WaitAll(a);
+                }
+        
+                else if(menuid == "2")
+                {
+                    var b = consultAsignatura(academicoWebServiceClient);
+                    Task.WaitAll(b);
+                }
+                    
+                else if (menuid == "3")
+                {
+                    var c = consultaProfesor(academicoWebServiceClient);
+                    Task.WaitAll(c);
+                }
+            }
 
-            var a = showStudentsAsync(academicoWebServiceClient);
-            Task.WaitAll(a);
-            var b = consultAsignatura(academicoWebServiceClient);
-            Task.WaitAll(b);
-            var c = consultaProfesor(academicoWebServiceClient);
-            Task.WaitAll(c);
 
-
-            Console.ReadKey();
+            Environment.Exit(0);
         }
 
         private static async System.Threading.Tasks.Task showStudentsAsync(AcademicoWebServiceClient academicoWebServiceClient)
